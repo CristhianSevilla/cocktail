@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+import Header from "./components/Header.vue";
+</script>
 
 <template>
-  <h1>Hola Mundo</h1>
+  <Header />
 </template>
 
 <style scoped></style>
