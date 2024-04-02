@@ -63,6 +63,13 @@ const paginaInicio = computed(() => route.name === "inicio");
             id="categoria"
           >
             <option value="">-- Seleccione --</option>
+            <option
+              v-for="categoria in store.categorias"
+              :key="categoria.strCategory"
+              :value="categoria.strCategory"
+            >
+              {{ categoria.strCategory }}
+            </option>
           </select>
           <input
             class="bg-orange-800 hover:bg-orange-900 cursor-pointer text-white font-extrabold w-full p-2 rounded-lg uppercase"
