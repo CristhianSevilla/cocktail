@@ -56,7 +56,7 @@ const handleSubmit = () => {
             class="p-3 w-full rounded-lg focus:outline-none"
             id="ingrediente"
             type="text"
-            placeholder="Nombre o Ingrediente: ej. Vodka, Tequila, etc."
+            placeholder="Ej. Vodka, Tequila, etc."
             v-model="store.busqueda.nombre"
           />
         </div>
