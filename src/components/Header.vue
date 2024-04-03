@@ -16,8 +16,8 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <header class="bg-slate-800" :class="{ header: paginaInicio }">
-    <div class="mx-auto container px-5 py-16">
+  <header class="bg-slate-800" :class="paginaInicio ? 'header h-svh' : ''">
+    <div class="mx-auto container px-5 xl:px-16 pt-5 md:pt-7 pb-16">
       <div class="flex justify-between items-center">
         <div>
           <RouterLink :to="{ name: 'inicio' }">

@@ -10,7 +10,6 @@ export const useBebidasStore = defineStore('bebidas', () => {
         categoria: ''
     })
 
-
     onMounted(async function() {
         const {data: {drinks}}= await APIServices.obtenerCategorias()
 
