@@ -1,4 +1,4 @@
-import { ref, onMounted, reactive, computed } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import { defineStore } from "pinia";
 import APIServices from "../services/APIServices";
 
@@ -18,25 +18,18 @@ export const useBebidasStore = defineStore("bebidas", () => {
     categorias.value = drinks;
   });
 
-  const porNombre = computed(() => {
-    return busqueda.nombre !== "" && busqueda.categoria === "";
-  });
-  const porCategoria = computed(() => {
-    return busqueda.categoria !== "" && busqueda.nombre === "";
-  });
-  const porNombreYcategoria = computed(() => {
-    return busqueda.nombre !== "" && busqueda.categoria !== "";
-  });
-
   async function obtenerRecetas() {
     try {
-      if (porNombre) {
+      if (busqueda.nombre && !busqueda.categoria) {
+        console.log("Por nombre");
         const { data } = await APIServices.recetasNombre(busqueda.nombre);
         recetas.value = data.drinks;
-      } else if (porCategoria) {
+      } else if (busqueda.categoria && !busqueda.nombre) {
+        console.log("Por categoria");
         const { data } = await APIServices.recetasCategoria(busqueda.categoria);
         recetas.value = data.drinks;
-      } else if (porNombreYcategoria) {
+      } else if (busqueda.nombre && busqueda.categoria) {
+        console.log("Por nombre y categoria");
         const { data } = await APIServices.recetasCatYnom(busqueda);
         recetas.value = data.drinks;
       }
