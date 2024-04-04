@@ -14,7 +14,7 @@ export const useBebidasStore = defineStore("bebidas", () => {
     const {
       data: { drinks },
     } = await APIServices.obtenerCategorias();
-    const { data } = await APIServices.recetasNombre("tequila");
+    const { data } = await APIServices.recetasNombre("gin");
     categorias.value = drinks;
     recetas.value = data.drinks;
   });
