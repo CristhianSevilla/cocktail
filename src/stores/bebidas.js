@@ -14,22 +14,23 @@ export const useBebidasStore = defineStore("bebidas", () => {
     const {
       data: { drinks },
     } = await APIServices.obtenerCategorias();
-
+    const { data } = await APIServices.recetasNombre("tequila");
     categorias.value = drinks;
+    recetas.value = data.drinks;
   });
 
   async function obtenerRecetas() {
     try {
       if (busqueda.nombre && !busqueda.categoria) {
-        console.log("Por nombre");
+        // Por nombre
         const { data } = await APIServices.recetasNombre(busqueda.nombre);
         recetas.value = data.drinks;
       } else if (busqueda.categoria && !busqueda.nombre) {
-        console.log("Por categoria");
+        //Por categoria
         const { data } = await APIServices.recetasCategoria(busqueda.categoria);
         recetas.value = data.drinks;
       } else if (busqueda.nombre && busqueda.categoria) {
-        console.log("Por nombre y categoria");
+        //Por nombre y categoria
         const { data } = await APIServices.recetasCatYnom(busqueda);
         recetas.value = data.drinks;
       }
