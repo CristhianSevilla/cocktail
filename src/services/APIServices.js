@@ -13,4 +13,7 @@ export default {
   recetasNombre(nombre) {
     return api(`/filter.php?i=${nombre}`);
   },
+  buscarRecetaporId(id) {
+    return api(`/lookup.php?i=${id}`);
+  },
 };

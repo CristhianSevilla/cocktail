@@ -39,10 +39,18 @@ export const useBebidasStore = defineStore("bebidas", () => {
     }
   }
 
+  async function obtenerRecetaById(id) {
+    const {
+      data: { drinks },
+    } = await APIServices.buscarRecetaporId(id);
+    console.log(drinks[0]);
+  }
+
   return {
     categorias,
     busqueda,
     obtenerRecetas,
     recetas,
+    obtenerRecetaById,
   };
 });
