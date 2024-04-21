@@ -7,7 +7,7 @@ import Modal from "./components/Modal.vue";
 <template>
   <Header />
 
-  <main class="container mx-auto mt-10">
+  <main class="container mx-auto mt-10 px-4 xl:px-16">
     <RouterView />
   </main>
 

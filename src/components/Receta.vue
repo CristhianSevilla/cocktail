@@ -18,10 +18,10 @@ defineProps({
         alt="Imagen Receta"
       />
     </div>
-    <div class="p-5">
-      <h2 class="text-2xl truncate font-extrabold">{{ receta.strDrink }}</h2>
+    <div class="px-5 p-3">
+      <h2 class="text-xl truncate font-extrabold">{{ receta.strDrink }}</h2>
       <button
-        class="bg-orange-500 hover:bg-orange-600 transition-all mt-5 w-full p-3 font-bold text-white text-lg rounded"
+        class="bg-orange-500 hover:bg-orange-600 transition-all mt-4 w-full p-2 font-bold text-white text-lg rounded"
         @click="bebidas.obtenerRecetaById(receta.idDrink)"
       >
         Ver Receta
