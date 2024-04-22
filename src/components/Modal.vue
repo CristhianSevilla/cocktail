@@ -11,6 +11,25 @@ import { useBebidasStore } from "../stores/bebidas.js";
 
 const modal = useModalStore();
 const bebidas = useBebidasStore();
+
+const formatearIngredientes = () => {
+  const ingredientesDiv = document.createElement("DIV");
+
+  for (let i = 1; i <= 15; i++) {
+    if (bebidas.receta[`strIngredient${i}`]) {
+      const ingrediente = bebidas.receta[`strIngredient${i}`];
+      const cantidad = bebidas.receta[`strMeasure${i}`];
+
+      const ingredienteCantidad = document.createElement("P");
+      ingredienteCantidad.classList.add("text-lg");
+      ingredienteCantidad.textContent = `* ${ingrediente} - ${cantidad}`;
+
+      ingredientesDiv.appendChild(ingredienteCantidad);
+    }
+  }
+
+  return ingredientesDiv;
+};
 </script>
 
 <template>
@@ -46,17 +65,43 @@ const bebidas = useBebidasStore();
               class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6"
             >
               <div>
-                <div class="mt-3">
-                  <DialogTitle
-                    as="h3"
-                    class="text-gray-900 text-4xl font-extrabold my-5"
-                  >
-                    {{ bebidas.receta.strDrink }}
-                  </DialogTitle>
-                  <img
-                    :src="bebidas.receta.strDrinkThumb"
-                    :alt="'Imagen de' + bebidas.receta.strDrink"
-                  />
+                <div>
+                  <div>
+                    <DialogTitle
+                      as="h3"
+                      class="text-gray-900 text-4xl font-extrabold my-5"
+                    >
+                      {{ bebidas.receta.strDrink }}
+                    </DialogTitle>
+                    <img
+                      :src="bebidas.receta.strDrinkThumb"
+                      :alt="'Imagen de' + bebidas.receta.strDrink"
+                    />
+                  </div>
+                  <div>
+                    <DialogTitle
+                      as="h4"
+                      class="text-gray-900 text-4xl font-extrabold my-5"
+                    >
+                      Ingredientes y cantidades
+                    </DialogTitle>
+                    <div v-html="formatearIngredientes().outerHTML"></div>
+                    <DialogTitle
+                      as="h4"
+                      class="text-gray-900 text-4xl font-extrabold my-5"
+                    >
+                      Instrucciones
+                    </DialogTitle>
+                    <div>
+                      <p>
+                        {{
+                          bebidas.receta.strInstructionsES
+                            ? bebidas.receta.strInstructionsES
+                            : bebidas.receta.strInstructionsDE
+                        }}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="mt-5 sm:mt-6 flex justify-between gap-4">
