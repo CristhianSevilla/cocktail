@@ -2,16 +2,26 @@
 import { computed } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import { useBebidasStore } from "../stores/bebidas";
+import { useNotificacionStore } from "@/stores/notificacion";
 
 const route = useRoute();
 const store = useBebidasStore();
+const notificacion = useNotificacionStore();
 
 const paginaInicio = computed(() => route.name === "inicio");
 
 const handleSubmit = () => {
-  //TODO: Validar
-
-  store.obtenerRecetas();
+  if (
+    store.busqueda.nombre.trim() !== "" ||
+    store.busqueda.categoria.trim() !== ""
+  ) {
+    store.obtenerRecetas();
+  } else {
+    notificacion.texto =
+      "Por lo menos uno de los campos de búsqueda es obligatorio";
+    notificacion.error = true;
+    notificacion.mostrar = true;
+  }
 };
 </script>
 
