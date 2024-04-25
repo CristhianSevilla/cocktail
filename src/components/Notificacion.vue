@@ -5,12 +5,6 @@ import { XMarkIcon } from "@heroicons/vue/20/solid";
 import { useNotificacionStore } from "../stores/notificacion";
 
 const notificacion = useNotificacionStore();
-
-const show = ref(false);
-
-setTimeout(() => {
-  notificacion.mostrar = false;
-}, 3000);
 </script>
 
 <template>
