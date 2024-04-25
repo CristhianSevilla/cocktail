@@ -3,6 +3,7 @@ import { RouterView } from "vue-router";
 import Header from "./components/Header.vue";
 import Modal from "./components/Modal.vue";
 import Notificacion from "./components/Notificacion.vue";
+import Spinner from "./components/Spinner.vue";
 </script>
 
 <template>
@@ -14,6 +15,7 @@ import Notificacion from "./components/Notificacion.vue";
 
   <Modal />
   <Notificacion />
+  <Spinner />
 </template>
 
 <style scoped></style>

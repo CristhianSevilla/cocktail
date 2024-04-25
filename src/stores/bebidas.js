@@ -2,9 +2,12 @@ import { ref, onMounted, reactive, computed } from "vue";
 import { defineStore } from "pinia";
 import APIServices from "../services/APIServices";
 import { useModalStore } from "./modal";
+import { useSpinnerStore } from "./spinner";
 
 export const useBebidasStore = defineStore("bebidas", () => {
   const modal = useModalStore();
+  const spinner = useSpinnerStore();
+
   const categorias = ref([]);
   const busqueda = reactive({
     nombre: "",
@@ -14,16 +17,24 @@ export const useBebidasStore = defineStore("bebidas", () => {
   const receta = ref({});
 
   onMounted(async function () {
-    const {
-      data: { drinks },
-    } = await APIServices.obtenerCategorias();
-    const { data } = await APIServices.recetasNombre("gin");
-    categorias.value = drinks;
-    recetas.value = data.drinks;
+    try {
+      spinner.spinner = true;
+      const {
+        data: { drinks },
+      } = await APIServices.obtenerCategorias();
+      const { data } = await APIServices.recetasNombre("gin");
+      categorias.value = drinks;
+      recetas.value = data.drinks;
+    } catch (error) {
+      throw error;
+    } finally {
+      spinner.spinner = false;
+    }
   });
 
   async function obtenerRecetas() {
     try {
+      spinner.spinner = true;
       if (busqueda.nombre && !busqueda.categoria) {
         // Por nombre
         const { data } = await APIServices.recetasNombre(busqueda.nombre);
@@ -38,15 +49,24 @@ export const useBebidasStore = defineStore("bebidas", () => {
         recetas.value = data.drinks;
       }
     } catch (error) {
-      console.log(error);
+      throw error;
+    } finally {
+      spinner.spinner = false;
     }
   }
   async function obtenerRecetaById(id) {
-    const {
-      data: { drinks },
-    } = await APIServices.buscarRecetaporId(id);
-    receta.value = drinks[0];
-    modal.handleClickModal();
+    try {
+      spinner.spinner = true;
+      const {
+        data: { drinks },
+      } = await APIServices.buscarRecetaporId(id);
+      receta.value = drinks[0];
+      modal.handleClickModal();
+    } catch (error) {
+      throw error;
+    } finally {
+      spinner.spinner = false;
+    }
   }
 
   const noRecetas = computed(() => recetas.value.length === 0);
