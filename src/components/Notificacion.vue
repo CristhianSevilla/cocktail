@@ -9,7 +9,7 @@ const notificacion = useNotificacionStore();
 const show = ref(false);
 
 setTimeout(() => {
-  show.value = true;
+  notificacion.mostrar = false;
 }, 3000);
 </script>
 
